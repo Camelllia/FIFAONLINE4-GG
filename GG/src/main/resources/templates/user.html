@@ -16,11 +16,16 @@ footer {
 table {
     margin-left: auto;
     margin-right: auto;
+    border-style: dashed;
+}
+
+td{
+    border-style: solid;
 }
 </style>
 <script ></script>
 <script type="text/javascript">
-    function searchInfo() {
+    function searchInfo(searchMaxDivision) {
         const nickname = $('#nickname').val();
         
         $.ajax({
@@ -29,17 +34,36 @@ table {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
         }).done(function (res) {
+            var strRes = JSON.stringify(res);
+            searchUserDivision(strRes.split('"')[3]);
             window.location.reload();
         }).fail(function (error){
             alert('없는 유저입니다. 다시 입력해주세요.');
         });
     }
+
+    function searchUserDivision(accessid) {
+
+        $.ajax({
+            type: 'GET',
+            url: 'api/v1/divisioninfo/'+accessid,
+            traditional: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+        }).done(function (res) {
+
+        }).fail(function (error){
+            alert('최고순위 조회 실패');
+        });
+
+        window.location.reload();
+    }
+    
 </script>
 <head>
     <meta charset="UTF-8">
-    <title>FIFA4-User</title>
+    <title>FIFA4-UserInfo</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="/button.js"></script>
 </head>
 <body>
     <h1 style="text-align: center">FIFA Online 4 - GG</h1>
@@ -49,7 +73,7 @@ table {
         <form style="margin: auto; width: 230px">
             <div class="input-group">
                 <input type="text" class="form-control" id="nickname" placeholder="구단주를 입력하세요">
-                <button class="btn btn-primary" type="button" id="search-info" onclick="searchInfo()">검색</button>
+                <button class="btn btn-primary" type="button" id="search-info" onclick="searchInfo(searchUserDivision)">검색</button>
             </div>
         </form>
     </div>
@@ -65,6 +89,24 @@ table {
                 <tr>
                     <td th:text="${nickName}"></td>
                     <td th:text="${level}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>순위 경기 매치 최고 점수</th>
+                <th>경기 타입</th>
+                <th>최고등급 달성일자</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">  
+                <tr>
+                    <td th:text="${maxDivision}"></td>
+                    <td th:text="${matchType}"></td>
+                    <td th:text="${regDate}"></td>
                 </tr>
             </tbody>
         </table>
