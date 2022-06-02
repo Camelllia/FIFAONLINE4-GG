@@ -19,6 +19,7 @@ public class UserApiClient {
 
     private final String userDivisionUrl = "https://api.nexon.co.kr/fifaonline4/v1.0/users/{accessid}/maxdivision";
 
+    private final String userTradeUrl = "https://api.nexon.co.kr/fifaonline4/v1.0/users/{accessid}/markets?tradetype={tradetype}&offset=0&limit=10";
 
     public UserResponseDto requestUserInfo(String nickname) {
 
@@ -38,4 +39,14 @@ public class UserApiClient {
 
         return restTemplate.exchange(userDivisionUrl, HttpMethod.GET, entity, UserDivisionResponseDto[].class, accessId).getBody();
     }
+
+    public UserTradeResponseDto[] requestUserTrade(String accessId, String tradeType) {
+
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", API_KEY);
+        final HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+
+        return restTemplate.exchange(userTradeUrl, HttpMethod.GET, entity, UserTradeResponseDto[].class, accessId, tradeType).getBody();
+    }
+
 }

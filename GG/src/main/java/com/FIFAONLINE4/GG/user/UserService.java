@@ -26,6 +26,19 @@ public class UserService {
         return userDivisionInfos;
     }
 
+    public UserTradeResponseDto[] searchUserTrade(String accessid, String tradeType) {
+
+        UserTradeResponseDto[] userTradeInfos = null;
+        userTradeInfos = userApiClient.requestUserTrade(accessid, tradeType);
+
+        for(int i = 0; i < userTradeInfos.length; i++) {
+            String[] dateArr = userTradeInfos[i].getTradeDate().split("T");
+            userTradeInfos[i].setTradeDate(dateArr[0]);
+        }
+
+        return userApiClient.requestUserTrade(accessid, tradeType);
+    }
+
     public String replaceDivision(int division) {
 
         switch (division) {

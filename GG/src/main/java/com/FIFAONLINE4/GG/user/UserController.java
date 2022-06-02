@@ -16,16 +16,27 @@ public class UserController {
 
     private UserDivisionResponseDto[] userDivisionDtoArr;
 
+    private UserTradeResponseDto[] userTradeDtoArr;
+
+    private String curAccessId;
+
     @GetMapping("/user")
     public String user(Model model) {
 
         if(userInfoDto != null) {
             model.addAttribute("nickName", userInfoDto.getNickname());
             model.addAttribute("level", userInfoDto.getLevel());
+
             if(userDivisionDtoArr != null) {
                 model.addAttribute("maxDivision", userService.replaceDivision(userDivisionDtoArr[0].getDivision()));
                 model.addAttribute("matchType", "순위 경기");
                 model.addAttribute("regDate", userDivisionDtoArr[0].getAchievementDate());
+            }
+
+            model.addAttribute("curAccessId", curAccessId);
+
+            if(userTradeDtoArr != null) {
+                model.addAttribute("tradeList", userTradeDtoArr);
             }
         }
         return "user";
@@ -44,8 +55,18 @@ public class UserController {
     @ResponseBody
     public UserDivisionResponseDto[] getUserDivisionInfo(@PathVariable String accessid) {
 
+        curAccessId = accessid;
         userDivisionDtoArr = userService.searchUserDivision(accessid);
 
         return userDivisionDtoArr;
+    }
+
+    @GetMapping("api/v1/trade/{accessid}/{tradeType}")
+    @ResponseBody
+    public UserTradeResponseDto[] getUserTradeInfo(@PathVariable(required = false) String accessid, @PathVariable String tradeType) {
+
+        accessid = curAccessId;
+        userTradeDtoArr = userService.searchUserTrade(accessid, tradeType);
+        return userTradeDtoArr;
     }
 }
