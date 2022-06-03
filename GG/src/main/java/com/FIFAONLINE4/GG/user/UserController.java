@@ -1,5 +1,6 @@
 package com.FIFAONLINE4.GG.user;
 
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,7 @@ public class UserController {
             model.addAttribute("curAccessId", curAccessId);
 
             if(userTradeDtoArr != null) {
+
                 model.addAttribute("tradeList", userTradeDtoArr);
             }
         }
