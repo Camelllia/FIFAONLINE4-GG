@@ -1,6 +1,7 @@
 package com.FIFAONLINE4.GG.user;
 
 import lombok.RequiredArgsConstructor;
+import org.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -15,9 +16,7 @@ public class PlayerApiClient {
 
     private final String API_KEY = "";
 
-    public JSONObject requestPlayerInfo() {
-
-        JSONObject json = null;
+    public JSONArray requestPlayerInfo() {
 
         try {
             
@@ -26,7 +25,6 @@ public class PlayerApiClient {
             HttpURLConnection conn = (HttpURLConnection) playerInfoUrl.openConnection();
 
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Authorization", API_KEY);
             conn.setRequestProperty("Content-type", "application/json");
 
             conn.setDoOutput(true);
@@ -40,13 +38,17 @@ public class PlayerApiClient {
                 sb.append(line);
             }
 
-            json = new JSONObject(sb.toString());
+            conn.disconnect();
+
+            String temp = sb.toString();
+
+            JSONArray jsonArray = new JSONArray(temp);
+
+            return jsonArray;
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            return json;
+            return null;
         }
     }
-    
 }
