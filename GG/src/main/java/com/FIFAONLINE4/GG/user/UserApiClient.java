@@ -13,7 +13,7 @@ public class UserApiClient {
 
     private final RestTemplate restTemplate;
 
-    private final String API_KEY = "";
+    private final String API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiMTMwOTQzNTAwNiIsImF1dGhfaWQiOiIyIiwidG9rZW5fdHlwZSI6IkFjY2Vzc1Rva2VuIiwic2VydmljZV9pZCI6IjQzMDAxMTQ4MSIsIlgtQXBwLVJhdGUtTGltaXQiOiI1MDA6MTAiLCJuYmYiOjE2NTM4OTk5OTIsImV4cCI6MTY2OTQ1MTk5MiwiaWF0IjoxNjUzODk5OTkyfQ.R5Gxow4X-BlCVh2q_qMjUgWlCme55uZ1-tpYQccjBIw";
 
     private final String userInfoUrl = "https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname={nickname}";
 
