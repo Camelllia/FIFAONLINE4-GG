@@ -30,7 +30,6 @@ public class PlayerApiClient {
             conn.setDoOutput(true);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
             StringBuilder sb = new StringBuilder();
             String line = null;
 
@@ -40,9 +39,8 @@ public class PlayerApiClient {
 
             conn.disconnect();
 
-            String temp = sb.toString();
-
-            JSONArray jsonArray = new JSONArray(temp);
+            String unSerialJson = sb.toString();
+            JSONArray jsonArray = new JSONArray(unSerialJson);
 
             return jsonArray;
 
