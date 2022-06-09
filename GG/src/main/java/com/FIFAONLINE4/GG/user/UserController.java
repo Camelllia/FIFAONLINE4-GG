@@ -1,12 +1,10 @@
 package com.FIFAONLINE4.GG.user;
 
-import com.google.gson.Gson;
+import com.FIFAONLINE4.GG.player.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 
 @RequiredArgsConstructor

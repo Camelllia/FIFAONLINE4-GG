@@ -1,4 +1,4 @@
-package com.FIFAONLINE4.GG.user;
+package com.FIFAONLINE4.GG.player;
 
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
