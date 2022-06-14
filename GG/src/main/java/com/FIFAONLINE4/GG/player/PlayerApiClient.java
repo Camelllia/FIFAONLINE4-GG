@@ -14,8 +14,6 @@ import org.json.JSONObject;
 @Service
 public class PlayerApiClient {
 
-    private final String API_KEY = "";
-
     public JSONArray requestPlayerInfo() {
 
         try {

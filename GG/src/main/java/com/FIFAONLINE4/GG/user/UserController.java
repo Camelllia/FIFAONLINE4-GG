@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -26,8 +28,6 @@ public class UserController {
     @GetMapping("/user")
     public String user(Model model) {
 
-        System.out.println(playerService.getMapFromPlayerJson());
-
         if(userInfoDto != null) {
             model.addAttribute("nickName", userInfoDto.getNickname());
             model.addAttribute("level", userInfoDto.getLevel());
@@ -41,7 +41,8 @@ public class UserController {
             model.addAttribute("curAccessId", curAccessId);
 
             if(userTradeDtoArr != null) {
-                model.addAttribute("tradeList", userTradeDtoArr);
+                Map playerInfoMap = playerService.getMapFromPlayerJson();
+                model.addAttribute("tradeList", playerService.replacePlayerName(playerInfoMap, userTradeDtoArr));
             }
         }
         return "user";

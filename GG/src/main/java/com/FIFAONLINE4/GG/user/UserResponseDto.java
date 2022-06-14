@@ -8,6 +8,8 @@ import lombok.Getter;
 public class UserResponseDto {
 
     private String accessId;
+
     private String nickname;
+
     private int level;
 }
