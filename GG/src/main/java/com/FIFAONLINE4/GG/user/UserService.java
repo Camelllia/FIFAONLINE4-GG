@@ -36,7 +36,7 @@ public class UserService {
             userTradeInfos[i].setTradeDate(dateArr[0]);
         }
 
-        return userApiClient.requestUserTrade(accessid, tradeType);
+        return userTradeInfos;
     }
 
     public String replaceDivision(int division) {

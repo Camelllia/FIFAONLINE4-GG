@@ -69,7 +69,7 @@ public class UserController {
 
     @GetMapping("api/v1/trade/{accessid}/{tradeType}")
     @ResponseBody
-    public UserTradeResponseDto[] getUserTradeInfo(@PathVariable(required = false) String accessid, @PathVariable String tradeType) {
+    public UserTradeResponseDto[] getUserTradeInfo(@PathVariable("accessid") String accessid, @PathVariable String tradeType) {
 
         accessid = curAccessId;
         userTradeDtoArr = userService.searchUserTrade(accessid, tradeType);

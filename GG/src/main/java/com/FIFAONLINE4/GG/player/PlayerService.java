@@ -31,11 +31,9 @@ public class PlayerService {
                 mapList.put(Integer.valueOf(playerId),playerName);
             }
 
-            return mapList;
-
         } catch (Exception e) {
             e.printStackTrace();
-
+        } finally {
             return mapList;
         }
     }
@@ -43,7 +41,7 @@ public class PlayerService {
     public UserTradeResponseDto[] replacePlayerName(Map<Integer, String> playerInfoMap, UserTradeResponseDto[] userTradeResponseDtos) {
 
         for(int i = 0; i < userTradeResponseDtos.length; i++) {
-           userTradeResponseDtos[i].setSpid(Integer.valueOf(playerInfoMap.get(userTradeResponseDtos[i].getSpid())));
+           userTradeResponseDtos[i].setSpid(playerInfoMap.get(userTradeResponseDtos[i].getSpid()));
         }
 
         return userTradeResponseDtos;

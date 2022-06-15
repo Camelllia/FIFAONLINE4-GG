@@ -13,7 +13,7 @@ public class UserTradeResponseDto {
 
     private String saleSn;
 
-    private Integer spid;
+    private Object spid;
 
     private Integer grade;
 
