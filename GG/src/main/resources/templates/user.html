@@ -67,7 +67,7 @@ td{
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
         }).done(function (res) {
-            location.href = location.href;
+            window.location.reload();
         }).fail(function (error){
             alert('최고순위 조회 실패');
         });
